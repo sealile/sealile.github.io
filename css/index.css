@@ -3424,16 +3424,17 @@ figure.highlight pre .javascript .function {
 }
 @media screen and (min-width: 768px) {
   #page-header #site-title {
-    font-size: 5em;
+    font-size: 5.8em;
   }
 }
 #page-header #site-subtitle {
   color: var(--light-grey);
   font-size: 1.15em;
+  font-weight: 900;
 }
 @media screen and (min-width: 768px) {
   #page-header #site-subtitle {
-    font-size: 1.72em;
+    font-size: 8em;
   }
 }
 #page-header #site_social_icons {
