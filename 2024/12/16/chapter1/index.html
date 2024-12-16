@@ -1,0 +1,437 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>时域离散信号和时域离散系统 | 基于AI的智能学习交互网站</title><meta name="author" content="Ming Hu"><meta name="copyright" content="Ming Hu"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="第1章 时域离散信号和时域离散系统">
+<meta property="og:type" content="article">
+<meta property="og:title" content="时域离散信号和时域离散系统">
+<meta property="og:url" content="http://harvey.dusksnow.xyz/2024/12/16/chapter1/index.html">
+<meta property="og:site_name" content="基于AI的智能学习交互网站">
+<meta property="og:description" content="第1章 时域离散信号和时域离散系统">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://harvey.dusksnow.xyz/img/pic_bed/6.jpg">
+<meta property="article:published_time" content="2024-12-16T00:10:45.000Z">
+<meta property="article:modified_time" content="2024-12-16T04:12:19.063Z">
+<meta property="article:author" content="Ming Hu">
+<meta property="article:tag" content="时域离散信号">
+<meta property="article:tag" content="数字信号处理">
+<meta property="article:tag" content="时域离散系统">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://harvey.dusksnow.xyz/img/pic_bed/6.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://harvey.dusksnow.xyz/2024/12/16/chapter1/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '时域离散信号和时域离散系统',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  isShuoshuo: false
+}</script><!-- hexo injector head_end start --><link rel="stylesheet" href="https://cdn.cbd.int/hexo-butterfly-wowjs/lib/animate.min.css" media="print" onload="this.media='screen'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/radar_avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">4</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">6</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-envelope"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/task/"><i class="fa-fw fas fa-heart"></i><span> 任务</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 相关链接</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg fixed" id="page-header" style="background-image: url(/img/pic_bed/6.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">基于AI的智能学习交互网站</span></a><a class="nav-page-title" href="/"><span class="site-name">时域离散信号和时域离散系统</span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-envelope"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/task/"><i class="fa-fw fas fa-heart"></i><span> 任务</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 相关链接</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">时域离散信号和时域离散系统</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-12-16T00:10:45.000Z" title="发表于 2024-12-16 08:10:45">2024-12-16</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-12-16T04:12:19.063Z" title="更新于 2024-12-16 12:12:19">2024-12-16</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%B5%84%E6%BA%90/">资源</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">总字数:</span><span class="word-count">2.9k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>9分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="第1章-时域离散信号和时域离散系统"><a href="#第1章-时域离散信号和时域离散系统" class="headerlink" title="第1章 时域离散信号和时域离散系统"></a>第1章 时域离散信号和时域离散系统</h1><h2 id="1-1-引-言"><a href="#1-1-引-言" class="headerlink" title="1.1  引　言"></a>1.1  引　言</h2><p>信号通常是一个自变量或几个自变量的函数。如果仅有一个自变量，则称为一维信号；如果有两个以上的自变量，则称为多维信号。</p>
+<p>针对信号的自变量和函数值的取值情况，信号可分为以下三种。 </p>
+<ol>
+<li><p>模拟信号：如果信号的自变量和函数值都连续，则称这种信号为模拟信号或者称为时域连续信号，例如语言信号、温度信号等。</p>
+</li>
+<li><p>时域离散信号：如果自变量取离散值，而函数值连续，则称这种信号称为时域离散信号，这种信号通常来源于对模拟信号的采样; </p>
+</li>
+<li><p>数字信号：如果信号的自变量和函数值均取离散值，则称为数字信号。</p>
+</li>
+</ol>
+<h2 id="1-2-时域离散信号"><a href="#1-2-时域离散信号" class="headerlink" title="1.2  时域离散信号"></a>1.2  时域离散信号</h2><p>实际中遇到的信号一般是模拟信号，对它进行等间隔采样便可以得到时域离散信号。 假设模拟信号为<em>x</em>a (<em>t</em>)，以采样间隔T对它进行等间隔采样，得到：</p>
+<p><img src="//images.weserv.nl/?url=https://gitee.com/sealile/pic_bed/raw/master/img/image-20241216101425743.png" alt="image-20241216101425743"></p>
+<p>这里, <em>x</em>(<em>n</em>)称为时域离散信号，式中的<em>n</em>取整数。 </p>
+<p>显然, <em>x</em>(<em>n</em>)是一个有序的数字，因此时域离散信号也可以称为序列。注意这里<em>n</em>取整数，非整数时无定义。时域离散信号有三种表示方法： </p>
+<ol>
+<li><p>集合符号表示序列 </p>
+</li>
+<li><p>公式表示序列 </p>
+</li>
+<li><p>图形表示序列</p>
+</li>
+</ol>
+<p>实际中要根据具体情况灵活运用三种表示方法，对于一般序列，包括由实际信号采样得下面介绍用MATLAB语言表示序列。 </p>
+<h3 id="1-2-1-常用的典型序列"><a href="#1-2-1-常用的典型序列" class="headerlink" title="1.2.1 常用的典型序列"></a>1.2.1 常用的典型序列</h3><p>1．单位采样序列<em>δ</em>(<em>n</em>)</p>
+<p><img src="//images.weserv.nl/?url=https://gitee.com/sealile/pic_bed/raw/master/img/image-20241216101526218.png" alt="image-20241216101526218"></p>
+<p>如图3所示。</p>
+<p> <img src="//images.weserv.nl/?url=//images.weserv.nl/?url=https://gitee.com/sealile/pic_bed/raw/master/img/image-20241216101543029.png" alt="image-20241216101543029"></p>
+<p>图3单位采样序列和单位冲激信号 (a)单位采样序列 (b)单位冲激信号</p>
+<p>2．单位阶跃序列<em>u</em>(<em>n</em>) </p>
+<p><img src="//images.weserv.nl/?url=https://gitee.com/sealile/pic_bed/raw/master/img/image-20241216101601674.png" alt="image-20241216101601674"></p>
+<p>单位阶跃序列如图4所示。它类似于模拟信号中的单位阶跃函数<em>u</em>(<em>t</em>)。<em>δ</em>(<em>n</em>)与<em>u</em>(<em>n</em>)之间的关系如下列式所示：</p>
+<p><img src="//images.weserv.nl/?url=https://gitee.com/sealile/pic_bed/raw/master/img/image-20241216101618213.png" alt="image-20241216101618213"></p>
+<p><img src="//images.weserv.nl/?url=https://gitee.com/sealile/pic_bed/raw/master/img/image-20241216101628338.png" alt="image-20241216101628338"></p>
+<p>​                     图4 单位阶跃序列 </p>
+<p>3．矩形序列<em>RN</em>(<em>n</em>)</p>
+<p><img src="//images.weserv.nl/?url=https://gitee.com/sealile/pic_bed/raw/master/img/image-20241216101651507.png" alt="image-20241216101651507"></p>
+<p>式中，<em>N</em>称为矩形序列的长度。当<em>N</em>&#x3D;4时，<em>R</em>4(<em>n</em>)的波形如图5所示。</p>
+<p><img src="//images.weserv.nl/?url=https://gitee.com/sealile/pic_bed/raw/master/img/image-20241216101708591.png" alt="image-20241216101708591">         </p>
+<p>​                                                </p>
+<p>4．实指数序列</p>
+<p><img src="//images.weserv.nl/?url=https://gitee.com/sealile/pic_bed/raw/master/img/image-20241216101736825.png" alt="image-20241216101736825"></p>
+<p>如果|<em>a</em>|&lt;1, *x*(*n*)的幅度随*n*的增大而减小，称*x*(*n*)为收敛序列；如果|*a*|&gt;1，则称为发散序列。其波形如图6所示。 </p>
+<p><img src="//images.weserv.nl/?url=https://gitee.com/sealile/pic_bed/raw/master/img/image-20241216101750975.png" alt="image-20241216101750975"></p>
+<p><strong>5.</strong> <strong>正弦序列</strong></p>
+<p><img src="//images.weserv.nl/?url=https://gitee.com/sealile/pic_bed/raw/master/img/image-20241216101809606.png" alt="image-20241216101809606"></p>
+<p>式中, ![img](第1章 时域离散信号和时域离散系统.assets&#x2F;clip_image039-173427488897121.gif)称为正弦序列的数字域频率(也称数字频率)，单位是弧度(rad)，它表示序列变化的速率，或者说表示相邻两个序列值之间变化的弧度数。 </p>
+<p>6．复指数序列 </p>
+<p><img src="//images.weserv.nl/?url=https://gitee.com/sealile/pic_bed/raw/master/img/image-20241216101837801.png" alt="image-20241216101837801"></p>
+<p>式中, <em>ω</em>0为数字域频率。设<em>σ</em>&#x3D;0，用极坐标和实部虚部表示如下式：</p>
+<p>7.周期序列<strong>（此部分为难度也是考点）</strong></p>
+<p><img src="//images.weserv.nl/?url=https://gitee.com/sealile/pic_bed/raw/master/img/image-20241216101918278.png" alt="image-20241216101918278"></p>
+<p>如果对所有<em>n</em>存在一个最小的正整数<em>N</em>，使下面等式成立：</p>
+<p>则称序列<em>x</em>(<em>n</em>)为周期性序列，周期为<em>N</em>。 </p>
+<p><strong>判断正弦序列的周期：</strong></p>
+<p>设  <img src="//images.weserv.nl/?url=https://gitee.com/sealile/pic_bed/raw/master/img/image-20241216101943408.png" alt="image-20241216101943408">那么</p>
+<p><img src="//images.weserv.nl/?url=https://gitee.com/sealile/pic_bed/raw/master/img/image-20241216101957355.png" alt="image-20241216101957355"></p>
+<p><img src="//images.weserv.nl/?url=https://gitee.com/sealile/pic_bed/raw/master/img/image-20241216102012734.png" alt="image-20241216102012734"></p>
+<h3 id="1-2-2-序列的运算"><a href="#1-2-2-序列的运算" class="headerlink" title="1.2.2 序列的运算"></a>1.2.2 序列的运算</h3><p>1． 加法和乘法 </p>
+<p>序列之间的加法和乘法，是指它的同序号的序列值逐项对应相加和相乘，如图7所示。</p>
+<p><img src="//images.weserv.nl/?url=https://gitee.com/sealile/pic_bed/raw/master/img/image-20241216102032859.png" alt="image-20241216102032859"></p>
+<h2 id="1-3-时域离散系统"><a href="#1-3-时域离散系统" class="headerlink" title="1.3  时域离散系统"></a>1.3  时域离散系统</h2><p>设时域离散系统的输入为<em>x</em>(<em>n</em>)，经过规定的运算，系统输出序列用<em>y</em>(<em>n</em>)表示。设运算关系用<em>T</em>［·］表示，输出与输入之间关系用下式表示：</p>
+<p><img src="//images.weserv.nl/?url=https://gitee.com/sealile/pic_bed/raw/master/img/image-20241216102144468.png" alt="image-20241216102144468"></p>
+<p>其框图如图8所示。</p>
+<p><img src="//images.weserv.nl/?url=https://gitee.com/sealile/pic_bed/raw/master/img/image-20241216110703899.png" alt="image-20241216110703899"></p>
+<h3 id="1-3-1-线性系统-（难点-重点）"><a href="#1-3-1-线性系统-（难点-重点）" class="headerlink" title="1.3.1 线性系统 （难点 重点）"></a>1.3.1 线性系统 （难点 重点）</h3><p>系统的输入、输出之间满足线性叠加原理的系统称为线性系统。设<em>x</em>1(<em>n</em>)和<em>x</em>2(<em>n</em>)分别作为系统的输入序列，其输出分别用y1(<em>n</em>)和<em>y</em>2(<em>n</em>)表示，即 </p>
+<p><img src="//images.weserv.nl/?url=https://gitee.com/sealile/pic_bed/raw/master/img/image-20241216110720226.png" alt="image-20241216110720226"></p>
+<p>那么线性系统一定满足下面三个公式：</p>
+<p><img src="//images.weserv.nl/?url=https://gitee.com/sealile/pic_bed/raw/master/img/image-20241216110730823.png" alt="image-20241216110730823"></p>
+<p>上式中<em>a</em>和<em>b</em>均是常数。</p>
+<h3 id="1-3-2-时不变系统-（难点-重点）"><a href="#1-3-2-时不变系统-（难点-重点）" class="headerlink" title="1.3.2 时不变系统 （难点 重点）"></a>1.3.2 时不变系统 （难点 重点）</h3><p>如果系统对输入信号的运算关系<em>T</em>［·］在整个运算过程中不随时间变化，或者说系统对于输入信号的响应与信号加于系统的时间无关，则这种系统称为时不变系统，用公式表示如下：</p>
+<p><img src="//images.weserv.nl/?url=https://gitee.com/sealile/pic_bed/raw/master/img/image-20241216110801757.png" alt="image-20241216110801757"></p>
+<p>式中<em>n</em>0为任意整数。检查一个系统是否是时不变系统，就是检查其是否满足（16）式。 </p>
+<h3 id="1-3-3-线性时不变系统输入与输出之间的关系"><a href="#1-3-3-线性时不变系统输入与输出之间的关系" class="headerlink" title="1.3.3 线性时不变系统输入与输出之间的关系"></a>1.3.3 线性时不变系统输入与输出之间的关系</h3><p><strong>线性卷积：（重点）</strong></p>
+<p>设系统的输入<em>x</em>(<em>n</em>)&#x3D;<em>δ</em>(<em>n</em>)，系统输出<em>y</em>(<em>n</em>)的初始状态为零，定义这种条件下的系统输出为系统的单位脉冲响应，用<em>h</em>(<em>n</em>)表示为</p>
+<p><img src="//images.weserv.nl/?url=https://gitee.com/sealile/pic_bed/raw/master/img/image-20241216111850949.png" alt="image-20241216111850949"></p>
+<p><em>h</em>(<em>n</em>)和模拟系统中的单位冲激响应<em>h</em>(<em>t</em>)相类似，都代表系统的时域特征。 </p>
+<p>设系统的输入用<em>x</em>(<em>n</em>)表示，按照（1.2.14）式表示成单位脉冲序列移位加权和为</p>
+<p><img src="//images.weserv.nl/?url=https://gitee.com/sealile/pic_bed/raw/master/img/image-20241216111903866.png" alt="image-20241216111903866"></p>
+<p>那么系统输出为：</p>
+<p><img src="//images.weserv.nl/?url=https://gitee.com/sealile/pic_bed/raw/master/img/image-20241216111922980.png" alt="image-20241216111922980"></p>
+<p>根据线性系统的叠加性质：</p>
+<p><img src="//images.weserv.nl/?url=https://gitee.com/sealile/pic_bed/raw/master/img/image-20241216111950899.png" alt="image-20241216111950899"></p>
+<p>又根据时不变性质系统输出与输入之间的关系为：</p>
+<p><img src="//images.weserv.nl/?url=https://gitee.com/sealile/pic_bed/raw/master/img/image-20241216112004146.png" alt="image-20241216112004146"></p>
+<p>式中的符号“*”代表卷积运算，（2）式表示线性时不变系统的输出等于输入序列和该系统的单位脉冲响应的卷积。计算卷积三种方法：图解法，列表法，解析法。</p>
+<h3 id="1-3-4-系统的因果性和稳定性（难点）"><a href="#1-3-4-系统的因果性和稳定性（难点）" class="headerlink" title="1.3.4 系统的因果性和稳定性（难点）"></a>1.3.4 系统的因果性和稳定性（难点）</h3><p>如果系统<em>n</em>时刻的输出只取决于<em>n</em>时刻以及<em>n</em>时刻以前的输入序列，而和<em>n</em>时刻以后的输入序列无关，则称该系统具有因果性质，或称该系统为因果系统。如果<em>n</em>时刻的输出还取决于<em>n</em>时刻以后的输入序列，在时间上违背了因果性，系统无法实现，则系统被称为非因果系统。因此系统的因果性是指系统的可实现性。</p>
+<p>因为单位脉冲响应是输入为<em>δ</em>(<em>n</em>)的零状态响应，在<em>n</em>&#x3D;0时刻以前即<em>n</em>&lt;0时，没有加入信号，输出只能等于零；因此，线性时不变系统具有因果性的充分必要条件是系统的单位脉冲响应满足下式：</p>
+<p><img src="//images.weserv.nl/?url=https://gitee.com/sealile/pic_bed/raw/master/img/image-20241216112144976.png" alt="image-20241216112144976"></p>
+<p>所谓稳定系统，是指对有界输入，系统输出也是有界的。系统稳定的充分必要条件是系统的单位脉冲响应绝对可和，用公式表示为：</p>
+<p><img src="//images.weserv.nl/?url=https://gitee.com/sealile/pic_bed/raw/master/img/image-20241216112153937.png" alt="image-20241216112153937"></p>
+<p>根据式（5）、式（6）可以得到：检查系统是否稳定，系统单位脉冲响应是否满足绝对可和的条件。</p>
+<h2 id="1-4-模拟信号数字处理方法"><a href="#1-4-模拟信号数字处理方法" class="headerlink" title="1.4  模拟信号数字处理方法"></a>1.4  模拟信号数字处理方法</h2><p>引入模拟信号转化成数字信号流程框图1。</p>
+<p><img src="//images.weserv.nl/?url=https://gitee.com/sealile/pic_bed/raw/master/img/image-20241216112233067.png" alt="image-20241216112233067"></p>
+<p>​                              图1 模拟信号数字处理框图</p>
+<h3 id="1-4-1-采样定理及A-D变换器"><a href="#1-4-1-采样定理及A-D变换器" class="headerlink" title="1.4.1 采样定理及A&#x2F;D变换器"></a>1.4.1 采样定理及A&#x2F;D变换器</h3><p>对模拟信号进行采样得到时域离散信号的过程如图2所示。采样信号![img](第1章 时域离散信号和时域离散系统.assets&#x2F;clip_image004-173427499737676.gif)就是模拟信号<em>x</em>a(<em>t</em>)与<em>p</em>T(<em>t</em>)（式1）相乘的结果。<em>p</em>T(<em>t</em>)每个单位冲激处在采样点上，强度为1，用公式表示为 </p>
+<p><img src="//images.weserv.nl/?url=https://gitee.com/sealile/pic_bed/raw/master/img/image-20241216112254562.png" alt="image-20241216112254562"></p>
+<p>在上式中只有当<em>t</em>&#x3D;<em>nT</em>时，才可能有非零值，因此写成下式：</p>
+<p><img src="//images.weserv.nl/?url=https://gitee.com/sealile/pic_bed/raw/master/img/image-20241216112305141.png" alt="image-20241216112305141"></p>
+<p>下面研究理想采样前后信号频谱的变化，从而找出为了使采样信号能不失真地恢复原模拟信号，采样速率<em>F</em>s(<em>F</em>s&#x3D;<em>T**－</em>1)与模拟信号最高频率<em>f</em>c之间的关系。 </p>
+<p>两信号在时域相乘的傅里叶变换等于两个信号分别的傅里叶变换的卷积，推导如下</p>
+<p><img src="//images.weserv.nl/?url=https://gitee.com/sealile/pic_bed/raw/master/img/image-20241216112322731.png" alt="image-20241216112322731"></p>
+<p>对（4）式进行推到变换得到： </p>
+<p> <img src="//images.weserv.nl/?url=https://gitee.com/sealile/pic_bed/raw/master/img/image-20241216112337619.png" alt="image-20241216112337619"></p>
+<p>上式表明理想采样信号的频谱是原模拟信号的频谱沿频率轴，每间隔采样角频率<em>Ω</em>s重复出现一次，或者说理想采样信号的频谱是原模拟信号的频谱以<em>Ω</em>s为周期，进行周期性延拓而成的。</p>
+<p><img src="//images.weserv.nl/?url=https://gitee.com/sealile/pic_bed/raw/master/img/image-20241216112354039.png" alt="image-20241216112354039"></p>
+<p>​                                          图2 对模拟信号进行采样</p>
+<p><strong>采样定理：（重点，难点）</strong></p>
+<p>采样定理如图3所示具体为：设连续信号<em>x</em>a(<em>t</em>)属带限信号，最高截止频率为<em>Ω</em>c，如果采样角频率<em>Ω</em>s≥2<em>Ω</em>c，那么让采样信号通过一个增益为<em>T</em>、截止频率为<em>Ω</em>s&#x2F;2的理想低通滤波器，可以唯一地恢复出原连续信号<em>x</em>a(<em>t</em>)。否则，<em>Ω</em>s&lt;2<em>Ω</em>c会造成采样信号中的频谱混叠现象，不可能无失真地恢复原连续信号。  </p>
+<p><img src="//images.weserv.nl/?url=https://gitee.com/sealile/pic_bed/raw/master/img/image-20241216112422089.png" alt="image-20241216112422089"></p>
+<p>​                                                图3 时域采样定理</p>
+<p>实际中对模拟信号进行采样，需根据模拟信号的截止频率，按照采样定理的要求选择采样频率，即<em>Ω</em>s≥2<em>Ω</em>c，但考虑到理想滤波器<em>G</em>（j<em>Ω</em>)不可实现，要有一定的过渡带，为此可选<em>Ω</em>s&#x3D;(3~4)<em>Ω</em>c。另外，可以在采样之前加一抗混叠的低通滤波器，滤去高于<em>Ω</em>s&#x2F;2的一些无用的高频分量，以及滤除其它的一些杂散信号。</p>
+<h3 id="1-4-2-将数字信号转换成模拟信号-（难点）"><a href="#1-4-2-将数字信号转换成模拟信号-（难点）" class="headerlink" title="1.4.2 将数字信号转换成模拟信号 （难点）"></a>1.4.2 将数字信号转换成模拟信号 （难点）</h3><p>当采样频率<em>F</em>s满足采样定理，时域离散信号的频谱没有频谱混叠现象，可用一个传输函数为<em>G</em>（j<em>ω</em>)的理想低通滤波器不失真地将原模拟信号<em>x</em>a(<em>t</em>)恢复出来，这是一种理想恢复。</p>
+<p>推导得到低通滤波器的单位冲激响应<em>g</em>(<em>t</em>)表示为：</p>
+<p><img src="//images.weserv.nl/?url=https://gitee.com/sealile/pic_bed/raw/master/img/image-20241216112445520.png" alt="image-20241216112445520"></p>
+<p>时域离散信号经过低通滤波器后得到的模拟信号:</p>
+<p><img src="//images.weserv.nl/?url=https://gitee.com/sealile/pic_bed/raw/master/img/image-20241216112501915.png" alt="image-20241216112501915"></p>
+<p>对式（7）推导得到恢复模拟信号表示为：</p>
+<p><img src="//images.weserv.nl/?url=https://gitee.com/sealile/pic_bed/raw/master/img/image-20241216112519274.png" alt="image-20241216112519274"></p>
+<p>由式（7）、（8）得到<em>g</em>(<em>t</em>)函数所起的作用是在各采样点之间内插，因此称为内插函数，而（6）式则称为内插公式。这种用理想低通滤波器恢复的模拟信号完全等于原模拟信号<em>x</em>a(<em>t</em>)，是一种无失真的恢复。但由于<em>g</em>(<em>t</em>)是非因果的，因此理想低通滤波器是非因果不可实现的。</p>
+<p>实际中采用D&#x2F;AC（Digital&#x2F;Analog Converter）完成数字信号到模拟信号的转换。D&#x2F;AC包括三部分，即解码器、零阶保持器和平滑滤波器，D&#x2F;AC方框图如图4所示。解码器的作用是将数字信号转换成时域离散信号<em>x</em>a(<em>nT</em>)，零阶保持器和平滑滤波器则将<em>x</em>a(<em>nT</em>)变成模拟信号。</p>
+<p><img src="//images.weserv.nl/?url=https://gitee.com/sealile/pic_bed/raw/master/img/image-20241216112544089.png" alt="image-20241216112544089"></p>
+<p>由时域离散信号<em>x</em>a(<em>nT</em>)恢复模拟信号的过程是在采样点内插的过程。理想低通滤波的方法是用<em>g</em>(<em>t</em>)函数作内插函数，还可以用一阶线性函数作内插。零阶保持器是将前一个采样值进行保持，一直到下一个采样值来到，再跳到新的采样值并保持，因此相当于进行常数内插。零阶保持器的单位冲激函数<em>h</em>(<em>t</em>)以及输出波形如图5所示。 </p>
+<p><img src="//images.weserv.nl/?url=https://gitee.com/sealile/pic_bed/raw/master/img/image-20241216112559425.png" alt="image-20241216112559425"></p>
+<p>零阶保持器是一个低通滤波器，能够起到将时域离散信号恢复成模拟信号的作用。但是在|<em>Ω</em>|&gt;π&#x2F;<em>T</em>区域有较多的高频分量，表现在时域上，就是恢复出的模拟信号是台阶形的。因此需要在D&#x2F;AC之后加平滑低通滤波器，滤除多余的高频分量，对时间波形起平滑作用。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://harvey.dusksnow.xyz">Ming Hu</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://harvey.dusksnow.xyz/2024/12/16/chapter1/">http://harvey.dusksnow.xyz/2024/12/16/chapter1/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://harvey.dusksnow.xyz" target="_blank">基于AI的智能学习交互网站</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%97%B6%E5%9F%9F%E7%A6%BB%E6%95%A3%E4%BF%A1%E5%8F%B7/">时域离散信号</a><a class="post-meta__tags" href="/tags/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/">数字信号处理</a><a class="post-meta__tags" href="/tags/%E6%97%B6%E5%9F%9F%E7%A6%BB%E6%95%A3%E7%B3%BB%E7%BB%9F/">时域离散系统</a></div><div class="post-share"><div class="social-share" data-image="/img/pic_bed/6.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/2024/12/16/chapter2/" title="时域离散信号和系统的频域分析"><img class="cover" src="/img/pic_bed/10.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">时域离散信号和系统的频域分析</div></div><div class="info-2"><div class="info-item-1">第2章 时域离散信号和系统的频域分析</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2024/12/16/chapter2/" title="时域离散信号和系统的频域分析"><img class="cover" src="/img/pic_bed/10.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-12-16</div><div class="info-item-2">时域离散信号和系统的频域分析</div></div><div class="info-2"><div class="info-item-1">第2章 时域离散信号和系统的频域分析</div></div></div></a><a class="pagination-related" href="/2024/12/16/chapter3/" title="离散傅里叶变换"><img class="cover" src="/img/pic_bed/8.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-12-16</div><div class="info-item-2">离散傅里叶变换</div></div><div class="info-2"><div class="info-item-1">第3章 离散傅里叶变换(DFT)</div></div></div></a></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/radar_avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Ming Hu</div><div class="author-info-description">基于AI的数字信号处理及应用智能学习交互网站</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">4</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">6</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/sealile"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/sealile" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:649625266@qq.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">致所有热爱学习的同学们：<br/>亲爱的同学们，让我们携手在这个平台上，以饱满的热情和不懈的努力，共同探索知识的海洋，开启智慧的大门。相信通过我们的共同努力，您定能在学习的道路上取得更加辉煌的成就！</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC1%E7%AB%A0-%E6%97%B6%E5%9F%9F%E7%A6%BB%E6%95%A3%E4%BF%A1%E5%8F%B7%E5%92%8C%E6%97%B6%E5%9F%9F%E7%A6%BB%E6%95%A3%E7%B3%BB%E7%BB%9F"><span class="toc-text">第1章 时域离散信号和时域离散系统</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-%E5%BC%95-%E8%A8%80"><span class="toc-text">1.1  引　言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-%E6%97%B6%E5%9F%9F%E7%A6%BB%E6%95%A3%E4%BF%A1%E5%8F%B7"><span class="toc-text">1.2  时域离散信号</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-1-%E5%B8%B8%E7%94%A8%E7%9A%84%E5%85%B8%E5%9E%8B%E5%BA%8F%E5%88%97"><span class="toc-text">1.2.1 常用的典型序列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-2-%E5%BA%8F%E5%88%97%E7%9A%84%E8%BF%90%E7%AE%97"><span class="toc-text">1.2.2 序列的运算</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-%E6%97%B6%E5%9F%9F%E7%A6%BB%E6%95%A3%E7%B3%BB%E7%BB%9F"><span class="toc-text">1.3  时域离散系统</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-1-%E7%BA%BF%E6%80%A7%E7%B3%BB%E7%BB%9F-%EF%BC%88%E9%9A%BE%E7%82%B9-%E9%87%8D%E7%82%B9%EF%BC%89"><span class="toc-text">1.3.1 线性系统 （难点 重点）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-2-%E6%97%B6%E4%B8%8D%E5%8F%98%E7%B3%BB%E7%BB%9F-%EF%BC%88%E9%9A%BE%E7%82%B9-%E9%87%8D%E7%82%B9%EF%BC%89"><span class="toc-text">1.3.2 时不变系统 （难点 重点）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-3-%E7%BA%BF%E6%80%A7%E6%97%B6%E4%B8%8D%E5%8F%98%E7%B3%BB%E7%BB%9F%E8%BE%93%E5%85%A5%E4%B8%8E%E8%BE%93%E5%87%BA%E4%B9%8B%E9%97%B4%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="toc-text">1.3.3 线性时不变系统输入与输出之间的关系</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-4-%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%9B%A0%E6%9E%9C%E6%80%A7%E5%92%8C%E7%A8%B3%E5%AE%9A%E6%80%A7%EF%BC%88%E9%9A%BE%E7%82%B9%EF%BC%89"><span class="toc-text">1.3.4 系统的因果性和稳定性（难点）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-4-%E6%A8%A1%E6%8B%9F%E4%BF%A1%E5%8F%B7%E6%95%B0%E5%AD%97%E5%A4%84%E7%90%86%E6%96%B9%E6%B3%95"><span class="toc-text">1.4  模拟信号数字处理方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4-1-%E9%87%87%E6%A0%B7%E5%AE%9A%E7%90%86%E5%8F%8AA-D%E5%8F%98%E6%8D%A2%E5%99%A8"><span class="toc-text">1.4.1 采样定理及A&#x2F;D变换器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4-2-%E5%B0%86%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E8%BD%AC%E6%8D%A2%E6%88%90%E6%A8%A1%E6%8B%9F%E4%BF%A1%E5%8F%B7-%EF%BC%88%E9%9A%BE%E7%82%B9%EF%BC%89"><span class="toc-text">1.4.2 将数字信号转换成模拟信号 （难点）</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/12/16/chapter1/" title="时域离散信号和时域离散系统"><img src="/img/pic_bed/6.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="时域离散信号和时域离散系统"/></a><div class="content"><a class="title" href="/2024/12/16/chapter1/" title="时域离散信号和时域离散系统">时域离散信号和时域离散系统</a><time datetime="2024-12-16T00:10:45.000Z" title="发表于 2024-12-16 08:10:45">2024-12-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/12/16/chapter2/" title="时域离散信号和系统的频域分析"><img src="/img/pic_bed/10.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="时域离散信号和系统的频域分析"/></a><div class="content"><a class="title" href="/2024/12/16/chapter2/" title="时域离散信号和系统的频域分析">时域离散信号和系统的频域分析</a><time datetime="2024-12-16T00:10:45.000Z" title="发表于 2024-12-16 08:10:45">2024-12-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/12/16/chapter3/" title="离散傅里叶变换"><img src="/img/pic_bed/8.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="离散傅里叶变换"/></a><div class="content"><a class="title" href="/2024/12/16/chapter3/" title="离散傅里叶变换">离散傅里叶变换</a><time datetime="2024-12-16T00:10:45.000Z" title="发表于 2024-12-16 08:10:45">2024-12-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/11/26/cnn/" title="即插即用的注意力机制"><img src="/img/pic_bed/20.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="即插即用的注意力机制"/></a><div class="content"><a class="title" href="/2024/11/26/cnn/" title="即插即用的注意力机制">即插即用的注意力机制</a><time datetime="2024-11-26T09:10:45.000Z" title="发表于 2024-11-26 17:10:45">2024-11-26</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2024 By Ming Hu</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="前往评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"><script>(() => {
+  const isShuoshuo = GLOBAL_CONFIG_SITE.isShuoshuo
+  const option = null
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://twikoo.dusksnow.xyz/',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(res => {
+      countELement.textContent = res[0].count
+    }).catch(err => {
+      console.error(err)
+    })
+  }
+
+  const init = (el = document, path = location.pathname) => {
+    twikoo.init({
+      el: el.querySelector('#twikoo-wrap'),
+      envId: 'https://twikoo.dusksnow.xyz/',
+      region: '',
+      onCommentLoaded: () => {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      },
+      ...option,
+      path: isShuoshuo ? path : (option && option.path) || path
+    })
+
+    
+
+    isShuoshuo && (window.shuoshuoComment.destroyTwikoo = () => {
+      if (el.children.length) {
+        el.innerHTML = ''
+        el.classList.add('no-comment')
+      }
+    })
+  }
+
+  const loadTwikoo = (el, path) => {
+    if (typeof twikoo === 'object') setTimeout(() => init(el, path), 0)
+    else btf.getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(() => init(el, path))
+  }
+
+  if (isShuoshuo) {
+    'Twikoo' === 'Twikoo'
+      ? window.shuoshuoComment = { loadComment: loadTwikoo }
+      : window.loadOtherComment = loadTwikoo
+    return
+  }
+
+  if ('Twikoo' === 'Twikoo' || !true) {
+    if (true) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo()
+  } else {
+    window.loadOtherComment = loadTwikoo
+  }
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="请输入关键词" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div><!-- hexo injector body_end start -->
+    <link rel="stylesheet" crossorigin href="https://g.alicdn.com/aliyun-documentation/web-chatbot-ui/0.0.11/index.css" />
+    <script type="module" crossorigin src="https://g.alicdn.com/aliyun-documentation/web-chatbot-ui/0.0.11/index.js"></script>
+    <script>
+      window.CHATBOT_CONFIG = {
+        endpoint: "https://webchatbot-lpsu-ultncoyziv.cn-hangzhou.fcapp.run/chat", // 可以替换为 https://{your-fc-http-trigger-domain}/chat
+        displayByDefault: false, // 默认不展示 AI 助手聊天框
+        aiChatOptions: { // aiChatOptions 中 options 会传递 aiChat 组件，自定义取值参考：https://docs.nlkit.com/nlux/reference/ui/ai-chat
+          conversationOptions: { // 自定义取值参考：https://docs.nlkit.com/nlux/reference/ui/ai-chat#conversation-options
+            conversationStarters: [
+              {prompt: '你好同学,有什么问题欢迎提问'},
+            ]
+          },
+          displayOptions: { // 自定义取值参考：https://docs.nlkit.com/nlux/reference/ui/ai-chat#display-options
+            height: 600,
+          },
+          personaOptions: { // 自定义取值参考：https://docs.nlkit.com/nlux/reference/ui/ai-chat#chat-personas
+            assistant: {
+              name: '你好，我是你的 AI 助手',
+              // AI 助手的图标
+              avatar: 'https://img.alicdn.com/imgextra/i2/O1CN01Pda9nq1YDV0mnZ31H_!!6000000003025-54-tps-120-120.apng',
+              tagline: '您可以尝试点击下方的快捷入口开启体验！',
+            }
+          }
+        }
+      };
+    </script>
+    <style>
+      :root {
+        /* webchat 工具栏的颜色 */
+        --webchat-toolbar-background-color: #1464E4;
+        /* webchat 工具栏文字和按钮的颜色 */
+        --webchat-toolbar-text-color: #FFF;
+      }
+      /* webchat 对话框如果被遮挡，可以尝试通过 z-index、bottom、right 等设置来调整位置 */
+      .webchat-container {
+        z-index: 100;
+        bottom: 10px;
+        right: 45px;
+      }
+      /* webchat 的唤起按钮如果被遮挡，可以尝试通过 z-index、bottom、right 等设置来调整位置 */
+      .webchat-bubble-tip {
+        z-index: 99;
+        bottom: 20px;
+        right: 45px;
+      }
+    </style>
+    <div class="js-pjax"><script async="async">var arr = document.getElementsByClassName('recent-post-item');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '1.5s');
+    arr[i].setAttribute('data-wow-delay', '200ms');
+    arr[i].setAttribute('data-wow-offset', '30');
+    arr[i].setAttribute('data-wow-iteration', '1');
+  }</script><script async="async">var arr = document.getElementsByClassName('card-widget');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '');
+    arr[i].setAttribute('data-wow-delay', '200ms');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script><script async="async">var arr = document.getElementsByClassName('flink-list-card');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__flipInY');
+    arr[i].setAttribute('data-wow-duration', '3s');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script><script async="async">var arr = document.getElementsByClassName('flink-list-card');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__animated');
+    arr[i].setAttribute('data-wow-duration', '3s');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script><script async="async">var arr = document.getElementsByClassName('article-sort-item');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__slideInRight');
+    arr[i].setAttribute('data-wow-duration', '1.5s');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script><script async="async">var arr = document.getElementsByClassName('site-card');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__flipInY');
+    arr[i].setAttribute('data-wow-duration', '3s');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script><script async="async">var arr = document.getElementsByClassName('site-card');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__animated');
+    arr[i].setAttribute('data-wow-duration', '3s');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script></div><script defer src="https://cdn.cbd.int/hexo-butterfly-wowjs/lib/wow.min.js"></script><script defer src="https://cdn.cbd.int/hexo-butterfly-wowjs/lib/wow_init.js"></script><!-- hexo injector body_end end --></body></html>
