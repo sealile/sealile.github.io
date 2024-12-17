@@ -304,7 +304,8 @@ template {
 .list-beauty li,
 .category-lists ul li {
   position: relative;
-  padding: 0.12em 0.4em 0.12em 1.4em;
+  padding: 0.08em 0.4em 0.12em 1.4em;
+  font-size: 20px;
 }
 .list-beauty li:hover:before,
 .category-lists ul li:hover:before {
@@ -2079,7 +2080,7 @@ figure.highlight pre .javascript .function {
 .category-lists ul li {
   position: relative;
   margin: 6px 0;
-  padding: 0.12em 0.4em 0.12em 1.4em;
+  padding: 0.1em 0.4em 3.12em 1.4em;
 }
 #body-wrap {
   display: -webkit-box;

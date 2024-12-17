@@ -1,0 +1,433 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>时域离散系统的网络结构 | 基于AI的智能学习交互网站</title><meta name="author" content="Ming Hu"><meta name="copyright" content="Ming Hu"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="第5章 时域离散系统的网络结构">
+<meta property="og:type" content="article">
+<meta property="og:title" content="时域离散系统的网络结构">
+<meta property="og:url" content="http://harvey.dusksnow.xyz/2024/12/16/chapter5/index.html">
+<meta property="og:site_name" content="基于AI的智能学习交互网站">
+<meta property="og:description" content="第5章 时域离散系统的网络结构">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://harvey.dusksnow.xyz/img/pic_bed/9.jpg">
+<meta property="article:published_time" content="2024-12-16T08:10:45.000Z">
+<meta property="article:modified_time" content="2024-12-17T03:59:40.237Z">
+<meta property="article:author" content="Ming Hu">
+<meta property="article:tag" content="时域离散系统">
+<meta property="article:tag" content="网络结构">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://harvey.dusksnow.xyz/img/pic_bed/9.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://harvey.dusksnow.xyz/2024/12/16/chapter5/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '时域离散系统的网络结构',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  isShuoshuo: false
+}</script><!-- hexo injector head_end start --><link rel="stylesheet" href="https://cdn.cbd.int/hexo-butterfly-wowjs/lib/animate.min.css" media="print" onload="this.media='screen'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/radar_avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">11</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">12</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-envelope"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/task/"><i class="fa-fw fas fa-heart"></i><span> 任务</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 相关链接</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg fixed" id="page-header" style="background-image: url(/img/pic_bed/9.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">基于AI的智能学习交互网站</span></a><a class="nav-page-title" href="/"><span class="site-name">时域离散系统的网络结构</span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-envelope"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/task/"><i class="fa-fw fas fa-heart"></i><span> 任务</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 相关链接</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">时域离散系统的网络结构</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-12-16T08:10:45.000Z" title="发表于 2024-12-16 16:10:45">2024-12-16</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-12-17T03:59:40.237Z" title="更新于 2024-12-17 11:59:40">2024-12-17</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%B5%84%E6%BA%90/">资源</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">总字数:</span><span class="word-count">1.7k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>5分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="第5章-时域离散系统的网络结构"><a href="#第5章-时域离散系统的网络结构" class="headerlink" title="第5章 时域离散系统的网络结构"></a>第5章 时域离散系统的网络结构</h1><h2 id="5-1-引言"><a href="#5-1-引言" class="headerlink" title="5.1 引言"></a>5.1 引言</h2><p>一般时域离散系统或网络可以用差分方程、单位脉冲响应以及系统函数进行描述。如果系统输入、输出服从<em>N</em>阶差分方程：</p>
+<p><img src="https://gitee.com/sealile/pic_bed/raw/master/img/image-20241217101424962.png" alt="image-20241217101424962"></p>
+<p>则其系统函数<em>H</em>（<em>z</em>）为</p>
+<p>  　　　　　　 　<img src="https://gitee.com/sealile/pic_bed/raw/master/img/image-20241217101454149.png" alt="image-20241217101454149">           </p>
+<p>　　为了用计算机或专用硬件完成对输入信号的处理（运算），必须把（1）式或者（2）式变换成一种算法，按照这种算法对输入信号进行运算。其实（5.1.1）式就是对输入信号的一种直接算法，如果已知输入信号<em>x</em>（<em>n</em>）以及<em>ai</em>、<em>bi</em>和<em>n</em>时刻以前的<em>y</em>（<em>n</em>－<em>i</em>），则可以递推<em>y</em>（<em>n</em>）值。但给定一个差分方程，不同的算法有多种，例如：</p>
+<p><img src="https://gitee.com/sealile/pic_bed/raw/master/img/image-20241217101705678.png" alt="image-20241217101705678"></p>
+<h2 id="5-2-数字滤波器结构的结构特点与表示方法"><a href="#5-2-数字滤波器结构的结构特点与表示方法" class="headerlink" title="5.2 数字滤波器结构的结构特点与表示方法"></a>5.2 数字滤波器结构的结构特点与表示方法</h2><p><strong>一、数字滤波器的结构表示法</strong></p>
+<ol>
+<li><p>框图表示</p>
+<p><img src="https://gitee.com/sealile/pic_bed/raw/master/img/image-20241217101725221.png" alt="image-20241217101725221"></p>
+</li>
+</ol>
+<p>​       </p>
+<p>2）信号流图法</p>
+<p>   <img src="https://gitee.com/sealile/pic_bed/raw/master/img/image-20241217101803016.png" alt="image-20241217101803016">                    </p>
+<h2 id="5-3-IIR数字滤波器的基本结构-（重点）"><a href="#5-3-IIR数字滤波器的基本结构-（重点）" class="headerlink" title="5.3 IIR数字滤波器的基本结构 （重点）"></a>5.3 IIR数字滤波器的基本结构 （重点）</h2><h3 id="5-3-1-直接型"><a href="#5-3-1-直接型" class="headerlink" title="5.3.1 直接型"></a><strong>5.3.1</strong> <strong>直接型</strong></h3><p><strong>一、直接I型</strong></p>
+<p>1.结构   </p>
+<p><img src="https://gitee.com/sealile/pic_bed/raw/master/img/image-20241217101910548.png" alt="image-20241217101910548"></p>
+<p><img src="https://gitee.com/sealile/pic_bed/raw/master/img/image-20241217101919291.png" alt="image-20241217101919291"></p>
+<p>2 .特点</p>
+<p>第一个网络实现零点，即实现*x(n)*加权延时: <img src="https://gitee.com/sealile/pic_bed/raw/master/img/image-20241217101932223.png" alt="image-20241217101932223"></p>
+<p>第二个网络实现极点，即实现*y(n)*加权延时: <img src="https://gitee.com/sealile/pic_bed/raw/master/img/image-20241217101940130.png" alt="image-20241217101940130"></p>
+<p>可见，第二网络是输出延时，即反馈网络。*共需（M+N）个存储延时单元。</p>
+<p><strong>二、</strong> 直接型II结构</p>
+<p>1.结构                  </p>
+<p>若 <img src="https://gitee.com/sealile/pic_bed/raw/master/img/image-20241217102005860.png" alt="image-20241217102005860"></p>
+<p><img src="https://gitee.com/sealile/pic_bed/raw/master/img/image-20241217102018463.png" alt="image-20241217102018463"></p>
+<ol start="2">
+<li>直接型结构优缺点</li>
+</ol>
+<p>优点：简单直观</p>
+<p>缺点：1.改变某一个{<em>ak</em> }将影响所有的极点</p>
+<p>2.改变某一个{<em>bk</em> }将影响所有的零点</p>
+<p>3.对有限字长效应太敏感，容易出现不稳定现象</p>
+<p>对于三阶以上的IIR滤波器，几乎都不采用直接型结构，而是采用级联型、并联型等其它形式的结构。</p>
+<h3 id="5-3-2-IIR级联"><a href="#5-3-2-IIR级联" class="headerlink" title="5.3.2 IIR级联"></a>5.3.2 IIR级联</h3><p>1.结构</p>
+<p>将系统函数按零极点分解成一阶节积的形式： </p>
+<p><img src="https://gitee.com/sealile/pic_bed/raw/master/img/image-20241217102049343.png" alt="image-20241217102049343"></p>
+<p><img src="https://gitee.com/sealile/pic_bed/raw/master/img/image-20241217102108487.png" alt="image-20241217102108487"></p>
+<p>每对共轭的零点（极点）合并起来构成一个实系数的二阶因子：</p>
+<p>  <img src="https://gitee.com/sealile/pic_bed/raw/master/img/image-20241217102115995.png" alt="image-20241217102115995"></p>
+<p><img src="https://gitee.com/sealile/pic_bed/raw/master/img/image-20241217102242051.png" alt="image-20241217102242051"></p>
+<p>2.级联型结构优点</p>
+<p>优点：1)每个二阶节控制一对极点和一对零点, 便于调整；</p>
+<p>2)极点和零点的配对方式及二阶节的级联顺序有许多种排列组合，具有很大的灵活性； </p>
+<p>3）对系数变化的敏感度小，受有限字长的影响比直接型低</p>
+<h3 id="5-3-3并联型型结构"><a href="#5-3-3并联型型结构" class="headerlink" title="5.3.3并联型型结构"></a>5.3.3并联型型结构</h3><p>1.结构</p>
+<p>将H（Z）展成部分分式形式:</p>
+<p> <img src="https://gitee.com/sealile/pic_bed/raw/master/img/image-20241217102313974.png" alt="image-20241217102313974"></p>
+<p><img src="https://gitee.com/sealile/pic_bed/raw/master/img/image-20241217102326975.png" alt="image-20241217102326975"></p>
+<p>2.并联型结构优缺点</p>
+<p>优点：1. 各基本节的误差互不影响；</p>
+<ol start="2">
+<li><p>可以单独调整极点的位置；</p>
+</li>
+<li><p>有限字长效应的影响小；</p>
+</li>
+</ol>
+<p>缺点: 1.不能向级联型那样直接调整零点</p>
+<p>系数较多 → 乘法次数多。 </p>
+<h2 id="5-4-FIR数字滤波器的基本结构"><a href="#5-4-FIR数字滤波器的基本结构" class="headerlink" title="5.4 FIR数字滤波器的基本结构"></a>5.4 FIR数字滤波器的基本结构</h2><h3 id="5-4-1-直接型-横截型-卷积型）（重点）"><a href="#5-4-1-直接型-横截型-卷积型）（重点）" class="headerlink" title="5.4.1 直接型(横截型,卷积型）（重点）"></a>5.4.1 直接型(横截型,卷积型）（重点）</h3><p>1.结构 </p>
+<p>数字滤波器传递函数</p>
+<p>   <img src="https://gitee.com/sealile/pic_bed/raw/master/img/image-20241217102532250.png" alt="image-20241217102532250"></p>
+<p>2．特点 </p>
+<p>1）简单直观，运算速度快； </p>
+<p>2）系数即为脉冲响应 <em>h</em>(<em>n</em>) 的序列值； </p>
+<p>3）不能直接控制零点。</p>
+<p><strong>5.4.2</strong> <strong>级联型</strong></p>
+<p>1.结构</p>
+<p>将<em>H（Z）</em>分解为实系数二阶因子的乘积形式</p>
+<p><img src="https://gitee.com/sealile/pic_bed/raw/master/img/image-20241217102551305.png" alt="image-20241217102551305"></p>
+<p>2．特点 </p>
+<p>1）每个二阶节可直接控制一对零点； </p>
+<p>2）所需的系数比直接型多 → 乘法次数多。  </p>
+<h2 id="5-5-线性相位结构"><a href="#5-5-线性相位结构" class="headerlink" title="5.5 线性相位结构"></a>5.5 线性相位结构</h2><p>  线性相位结构是FIR系统的直接型结构的简化网络结构，特点是网络具有线性相位特性，比直接型结构节约了近一半的乘法器。第7章将证明， 如果系统具有线性相位，它的单位脉冲响应满足下面公式：</p>
+<p><img src="https://gitee.com/sealile/pic_bed/raw/master/img/image-20241217102616492.png" alt="image-20241217102616492"></p>
+<p>式中，“＋”代表第一类线性相位滤波器； “－”号代表第二类线性相位滤波器。系统函数满足下面两式： </p>
+<p>　当<em>N</em>为偶数时，</p>
+<p><img src="https://gitee.com/sealile/pic_bed/raw/master/img/image-20241217102625269.png" alt="image-20241217102625269"></p>
+<p>  当<em>N</em>为奇数时，</p>
+<p><img src="https://gitee.com/sealile/pic_bed/raw/master/img/image-20241217102634018.png" alt="image-20241217102634018"></p>
+<p>运算时先进行方括号中的加法（减法）运算，再进行乘法运算。第一类线性相位网络结构的流图如图4所示，第二类线性相位网络结构的流图如图5所示。和直接型结构比较，如果<em>N</em>取偶数，直接型需要<em>N</em>个乘法器，而线性相位结构减少到<em>N</em>&#x2F;2个乘法器，节约了一半的乘法器。如果<em>N</em>取奇数，则乘法器减少到（<em>N</em>－1）&#x2F;2个，也近似节约了近一半的乘法器。 </p>
+<p><img src="https://gitee.com/sealile/pic_bed/raw/master/img/image-20241217102650920.png" alt="image-20241217102650920"></p>
+<p><img src="https://gitee.com/sealile/pic_bed/raw/master/img/image-20241217102659383.png" alt="image-20241217102659383"></p>
+<h2 id="5-6-频率采样型"><a href="#5-6-频率采样型" class="headerlink" title="5.6 频率采样型"></a>5.6 频率采样型</h2><h3 id="5-6-1-频率采样型的基本结构"><a href="#5-6-1-频率采样型的基本结构" class="headerlink" title="5.6.1 频率采样型的基本结构"></a><strong>5.6.1</strong> <strong>频率采样型的基本结构</strong></h3><p>序列的Z变换<em>H</em>（<em>z</em>）与频域采样值<em>H</em>（<em>k</em>）满足下面关系式：</p>
+<p><img src="https://gitee.com/sealile/pic_bed/raw/master/img/image-20241217102720433.png" alt="image-20241217102720433"></p>
+<p>设FIR滤波器单位脉冲响应<em>h</em>（<em>n</em>）长度为<em>M</em>，系统函数<em>H</em>（<em>z</em>）&#x3D;ZT［<em>h</em>（<em>n</em>）］，则（6）式中<em>H</em>（<em>k</em>）用下式计算：</p>
+<p><img src="https://gitee.com/sealile/pic_bed/raw/master/img/image-20241217102729243.png" alt="image-20241217102729243"></p>
+<p>要求频率域采样点数<em>N</em>≥<em>M</em>。（6）式提供了一种称为频率采样的网络结构。由于这种结构是通过频域采样得来的，存在时域混叠的问题，因此不适合IIR系统，只适合FIR系统。但这种网络结构中又存在反馈网络，不同于前面介绍的FIR网络结构，下面进行分析。 </p>
+<p>　　将（6）式写成下式：</p>
+<p><img src="https://gitee.com/sealile/pic_bed/raw/master/img/image-20241217102741585.png" alt="image-20241217102741585"></p>
+<p>式中<em>Hc</em>（<em>z</em>）是前面学习过的梳状滤波器，<em>Hk</em>（<em>z</em>）是IIR的一阶网络。这样，<em>H</em>（<em>z</em>）是由梳状滤波器<em>Hc</em>（<em>z</em>）和<em>N</em>个一阶网络<em>Hk</em>（<em>z</em>）的并联结构进行级联而成的，其网络结构如图6所示。该网络结构中有反馈支路，它是由<em>Hk</em>（<em>z</em>）产生的，其极点为</p>
+<p><img src="https://gitee.com/sealile/pic_bed/raw/master/img/image-20241217102749418.png" alt="image-20241217102749418"></p>
+<p>即它们是单位圆上有等间隔分布的<em>N</em>个极点，<em>Hc</em>（<em>z</em>）是一个梳状滤波网络，其零点为</p>
+<p><img src="https://gitee.com/sealile/pic_bed/raw/master/img/image-20241217102812065.png" alt="image-20241217102812065"></p>
+<p>刚好和极点相同，也是等间隔地分布在单位圆上。理论上，极点和零点相互抵消，保证了网络的稳定性， 使频率域采样结构仍属FIR网络结构。 </p>
+<p><img src="https://gitee.com/sealile/pic_bed/raw/master/img/image-20241217102822369.png" alt="image-20241217102822369"></p>
+<h3 id="5-6-2-频率取样型结构优缺点"><a href="#5-6-2-频率取样型结构优缺点" class="headerlink" title="5.6.2 频率取样型结构优缺点"></a><strong>5.6.2</strong> <strong>频率取样型结构优缺点</strong></h3><p>优点：</p>
+<ol>
+<li><p>H(k)是W&#x3D;2πk&#x2F;N 在处的频率响应值，可以直接控制 滤波器的响应；</p>
+</li>
+<li><p>便于标准化、模块化；</p>
+</li>
+</ol>
+<p>缺点：</p>
+<ol>
+<li><p>H(k)和WN^(-k) 为复数，运算麻烦；</p>
+</li>
+<li><p>稳定性难保证；</p>
+</li>
+</ol>
+<h3 id="5-6-3-频率取样型结构改进"><a href="#5-6-3-频率取样型结构改进" class="headerlink" title="5.6.3 频率取样型结构改进"></a><strong>5.6.3</strong> <strong>频率取样型结构改进</strong></h3><p> 1.存在问题</p>
+<p>在有限字长情况下，系数量化后极点不能和零点抵消，使FIR系统不稳定。</p>
+<p>2.解决方法</p>
+<p>在<em>r</em>圆上进行(<em>r</em>&lt;1但近似等于1)取样，即用<em>rz</em>-1代替 <em>z</em>-1，使极点和相应的零点移到单位圆内。</p>
+<p> <img src="https://gitee.com/sealile/pic_bed/raw/master/img/image-20241217102949851.png" alt="image-20241217102949851"></p>
+<p>​    </p>
+<p>修正后的频率采样型结构</p>
+<p><img src="https://gitee.com/sealile/pic_bed/raw/master/img/image-20241217103000697.png" alt="image-20241217103000697"></p>
+<p>3.h(n)为实序列</p>
+<p><img src="https://gitee.com/sealile/pic_bed/raw/master/img/image-20241217103032366.png" alt="image-20241217103032366"></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://harvey.dusksnow.xyz">Ming Hu</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://harvey.dusksnow.xyz/2024/12/16/chapter5/">http://harvey.dusksnow.xyz/2024/12/16/chapter5/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://harvey.dusksnow.xyz" target="_blank">基于AI的智能学习交互网站</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%97%B6%E5%9F%9F%E7%A6%BB%E6%95%A3%E7%B3%BB%E7%BB%9F/">时域离散系统</a><a class="post-meta__tags" href="/tags/%E7%BD%91%E7%BB%9C%E7%BB%93%E6%9E%84/">网络结构</a></div><div class="post-share"><div class="social-share" data-image="/img/pic_bed/9.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2024/12/16/chapter2/" title="时域离散信号和系统的频域分析"><img class="cover" src="/img/pic_bed/8.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">时域离散信号和系统的频域分析</div></div><div class="info-2"><div class="info-item-1">第2章 时域离散信号和系统的频域分析</div></div></div></a><a class="pagination-related" href="/2024/12/16/chapter6/" title="无限脉冲响应数字滤波器的设计"><img class="cover" src="/img/pic_bed/10.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">无限脉冲响应数字滤波器的设计</div></div><div class="info-2"><div class="info-item-1">第6章 无限脉冲响应数字滤波器的设计</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2024/12/16/chapter1/" title="时域离散信号和时域离散系统"><img class="cover" src="/img/pic_bed/10.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-12-16</div><div class="info-item-2">时域离散信号和时域离散系统</div></div><div class="info-2"><div class="info-item-1">第1章 时域离散信号和时域离散系统</div></div></div></a></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/radar_avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Ming Hu</div><div class="author-info-description">基于AI的数字信号处理及应用智能学习交互网站</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">11</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">12</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/sealile"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/sealile" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:649625266@qq.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">致所有热爱学习的同学们：<br/>亲爱的同学们，让我们携手在这个平台上，以饱满的热情和不懈的努力，共同探索知识的海洋，开启智慧的大门。相信通过我们的共同努力，您定能在学习的道路上取得更加辉煌的成就！</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC5%E7%AB%A0-%E6%97%B6%E5%9F%9F%E7%A6%BB%E6%95%A3%E7%B3%BB%E7%BB%9F%E7%9A%84%E7%BD%91%E7%BB%9C%E7%BB%93%E6%9E%84"><span class="toc-text">第5章 时域离散系统的网络结构</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#5-1-%E5%BC%95%E8%A8%80"><span class="toc-text">5.1 引言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-2-%E6%95%B0%E5%AD%97%E6%BB%A4%E6%B3%A2%E5%99%A8%E7%BB%93%E6%9E%84%E7%9A%84%E7%BB%93%E6%9E%84%E7%89%B9%E7%82%B9%E4%B8%8E%E8%A1%A8%E7%A4%BA%E6%96%B9%E6%B3%95"><span class="toc-text">5.2 数字滤波器结构的结构特点与表示方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-3-IIR%E6%95%B0%E5%AD%97%E6%BB%A4%E6%B3%A2%E5%99%A8%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84-%EF%BC%88%E9%87%8D%E7%82%B9%EF%BC%89"><span class="toc-text">5.3 IIR数字滤波器的基本结构 （重点）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-3-1-%E7%9B%B4%E6%8E%A5%E5%9E%8B"><span class="toc-text">5.3.1 直接型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-3-2-IIR%E7%BA%A7%E8%81%94"><span class="toc-text">5.3.2 IIR级联</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-3-3%E5%B9%B6%E8%81%94%E5%9E%8B%E5%9E%8B%E7%BB%93%E6%9E%84"><span class="toc-text">5.3.3并联型型结构</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-4-FIR%E6%95%B0%E5%AD%97%E6%BB%A4%E6%B3%A2%E5%99%A8%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84"><span class="toc-text">5.4 FIR数字滤波器的基本结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-4-1-%E7%9B%B4%E6%8E%A5%E5%9E%8B-%E6%A8%AA%E6%88%AA%E5%9E%8B-%E5%8D%B7%E7%A7%AF%E5%9E%8B%EF%BC%89%EF%BC%88%E9%87%8D%E7%82%B9%EF%BC%89"><span class="toc-text">5.4.1 直接型(横截型,卷积型）（重点）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-5-%E7%BA%BF%E6%80%A7%E7%9B%B8%E4%BD%8D%E7%BB%93%E6%9E%84"><span class="toc-text">5.5 线性相位结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-6-%E9%A2%91%E7%8E%87%E9%87%87%E6%A0%B7%E5%9E%8B"><span class="toc-text">5.6 频率采样型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-6-1-%E9%A2%91%E7%8E%87%E9%87%87%E6%A0%B7%E5%9E%8B%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84"><span class="toc-text">5.6.1 频率采样型的基本结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-6-2-%E9%A2%91%E7%8E%87%E5%8F%96%E6%A0%B7%E5%9E%8B%E7%BB%93%E6%9E%84%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="toc-text">5.6.2 频率取样型结构优缺点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-6-3-%E9%A2%91%E7%8E%87%E5%8F%96%E6%A0%B7%E5%9E%8B%E7%BB%93%E6%9E%84%E6%94%B9%E8%BF%9B"><span class="toc-text">5.6.3 频率取样型结构改进</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/12/16/chapter4/" title="快速傅里叶变换(FFT)"><img src="/img/pic_bed/11.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="快速傅里叶变换(FFT)"/></a><div class="content"><a class="title" href="/2024/12/16/chapter4/" title="快速傅里叶变换(FFT)">快速傅里叶变换(FFT)</a><time datetime="2024-12-16T08:10:45.000Z" title="发表于 2024-12-16 16:10:45">2024-12-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/12/16/chapter2/" title="时域离散信号和系统的频域分析"><img src="/img/pic_bed/8.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="时域离散信号和系统的频域分析"/></a><div class="content"><a class="title" href="/2024/12/16/chapter2/" title="时域离散信号和系统的频域分析">时域离散信号和系统的频域分析</a><time datetime="2024-12-16T08:10:45.000Z" title="发表于 2024-12-16 16:10:45">2024-12-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/12/16/chapter5/" title="时域离散系统的网络结构"><img src="/img/pic_bed/9.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="时域离散系统的网络结构"/></a><div class="content"><a class="title" href="/2024/12/16/chapter5/" title="时域离散系统的网络结构">时域离散系统的网络结构</a><time datetime="2024-12-16T08:10:45.000Z" title="发表于 2024-12-16 16:10:45">2024-12-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/12/16/chapter6/" title="无限脉冲响应数字滤波器的设计"><img src="/img/pic_bed/10.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无限脉冲响应数字滤波器的设计"/></a><div class="content"><a class="title" href="/2024/12/16/chapter6/" title="无限脉冲响应数字滤波器的设计">无限脉冲响应数字滤波器的设计</a><time datetime="2024-12-16T08:10:45.000Z" title="发表于 2024-12-16 16:10:45">2024-12-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/12/16/chapter3/" title="离散傅里叶变换"><img src="/img/pic_bed/9.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="离散傅里叶变换"/></a><div class="content"><a class="title" href="/2024/12/16/chapter3/" title="离散傅里叶变换">离散傅里叶变换</a><time datetime="2024-12-16T08:10:45.000Z" title="发表于 2024-12-16 16:10:45">2024-12-16</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2024 By Ming Hu</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="前往评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"><script>(() => {
+  const isShuoshuo = GLOBAL_CONFIG_SITE.isShuoshuo
+  const option = null
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://twikoo.dusksnow.xyz/',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(res => {
+      countELement.textContent = res[0].count
+    }).catch(err => {
+      console.error(err)
+    })
+  }
+
+  const init = (el = document, path = location.pathname) => {
+    twikoo.init({
+      el: el.querySelector('#twikoo-wrap'),
+      envId: 'https://twikoo.dusksnow.xyz/',
+      region: '',
+      onCommentLoaded: () => {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      },
+      ...option,
+      path: isShuoshuo ? path : (option && option.path) || path
+    })
+
+    
+
+    isShuoshuo && (window.shuoshuoComment.destroyTwikoo = () => {
+      if (el.children.length) {
+        el.innerHTML = ''
+        el.classList.add('no-comment')
+      }
+    })
+  }
+
+  const loadTwikoo = (el, path) => {
+    if (typeof twikoo === 'object') setTimeout(() => init(el, path), 0)
+    else btf.getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(() => init(el, path))
+  }
+
+  if (isShuoshuo) {
+    'Twikoo' === 'Twikoo'
+      ? window.shuoshuoComment = { loadComment: loadTwikoo }
+      : window.loadOtherComment = loadTwikoo
+    return
+  }
+
+  if ('Twikoo' === 'Twikoo' || !true) {
+    if (true) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo()
+  } else {
+    window.loadOtherComment = loadTwikoo
+  }
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="请输入关键词" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div><!-- hexo injector body_end start -->
+    <link rel="stylesheet" crossorigin href="https://g.alicdn.com/aliyun-documentation/web-chatbot-ui/0.0.11/index.css" />
+    <script type="module" crossorigin src="https://g.alicdn.com/aliyun-documentation/web-chatbot-ui/0.0.11/index.js"></script>
+    <script>
+      window.CHATBOT_CONFIG = {
+        endpoint: "https://webchatbot-lpsu-ultncoyziv.cn-hangzhou.fcapp.run/chat", // 可以替换为 https://{your-fc-http-trigger-domain}/chat
+        displayByDefault: false, // 默认不展示 AI 助手聊天框
+        aiChatOptions: { // aiChatOptions 中 options 会传递 aiChat 组件，自定义取值参考：https://docs.nlkit.com/nlux/reference/ui/ai-chat
+          conversationOptions: { // 自定义取值参考：https://docs.nlkit.com/nlux/reference/ui/ai-chat#conversation-options
+            conversationStarters: [
+              {prompt: '你好同学,有什么问题欢迎提问'},
+            ]
+          },
+          displayOptions: { // 自定义取值参考：https://docs.nlkit.com/nlux/reference/ui/ai-chat#display-options
+            height: 600,
+          },
+          personaOptions: { // 自定义取值参考：https://docs.nlkit.com/nlux/reference/ui/ai-chat#chat-personas
+            assistant: {
+              name: '你好，我是你的 AI 助手',
+              // AI 助手的图标
+              avatar: 'https://img.alicdn.com/imgextra/i2/O1CN01Pda9nq1YDV0mnZ31H_!!6000000003025-54-tps-120-120.apng',
+              tagline: '您可以尝试点击下方的快捷入口开启体验！',
+            }
+          }
+        }
+      };
+    </script>
+    <style>
+      :root {
+        /* webchat 工具栏的颜色 */
+        --webchat-toolbar-background-color: #1464E4;
+        /* webchat 工具栏文字和按钮的颜色 */
+        --webchat-toolbar-text-color: #FFF;
+      }
+      /* webchat 对话框如果被遮挡，可以尝试通过 z-index、bottom、right 等设置来调整位置 */
+      .webchat-container {
+        z-index: 100;
+        bottom: 10px;
+        right: 45px;
+      }
+      /* webchat 的唤起按钮如果被遮挡，可以尝试通过 z-index、bottom、right 等设置来调整位置 */
+      .webchat-bubble-tip {
+        z-index: 99;
+        bottom: 20px;
+        right: 45px;
+      }
+    </style>
+    <div class="js-pjax"><script async="async">var arr = document.getElementsByClassName('recent-post-item');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '1.5s');
+    arr[i].setAttribute('data-wow-delay', '200ms');
+    arr[i].setAttribute('data-wow-offset', '30');
+    arr[i].setAttribute('data-wow-iteration', '1');
+  }</script><script async="async">var arr = document.getElementsByClassName('card-widget');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '');
+    arr[i].setAttribute('data-wow-delay', '200ms');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script><script async="async">var arr = document.getElementsByClassName('flink-list-card');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__flipInY');
+    arr[i].setAttribute('data-wow-duration', '3s');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script><script async="async">var arr = document.getElementsByClassName('flink-list-card');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__animated');
+    arr[i].setAttribute('data-wow-duration', '3s');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script><script async="async">var arr = document.getElementsByClassName('article-sort-item');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__slideInRight');
+    arr[i].setAttribute('data-wow-duration', '1.5s');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script><script async="async">var arr = document.getElementsByClassName('site-card');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__flipInY');
+    arr[i].setAttribute('data-wow-duration', '3s');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script><script async="async">var arr = document.getElementsByClassName('site-card');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__animated');
+    arr[i].setAttribute('data-wow-duration', '3s');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script></div><script defer src="https://cdn.cbd.int/hexo-butterfly-wowjs/lib/wow.min.js"></script><script defer src="https://cdn.cbd.int/hexo-butterfly-wowjs/lib/wow_init.js"></script><!-- hexo injector body_end end --></body></html>
